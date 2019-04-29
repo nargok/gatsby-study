@@ -9,10 +9,14 @@ const IndexPage = ({ data }) => (
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h1>Hello Great Gatsbt</h1>
     {data.allWorksYaml.edges.map(edge => {
-      const work = edge.node
-      return <div>
-        {work.title} - {work.category} - {work.year}
-      </div>
+      const work = edge.node;
+      return (
+        <div>
+          <Link to={`/works/${work.slug}`}>
+            {work.title} - {work.category} - {work.year}
+          </Link>
+        </div>
+      )
     })}
     <Link to="/page-2/">Go to page 2</Link>
     <Link to="/about/">Go to about page</Link>
@@ -27,6 +31,7 @@ export const query = graphql`
           title
           category
           year
+          slug
         }
       }
     }
